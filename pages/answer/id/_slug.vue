@@ -2,6 +2,10 @@
   <div>
     <h1>{{ details.title }}</h1>
     <p>{{ details.body }}</p>
+    <small @click="sortComments"
+      >Sort Comments By Rating
+      <span>{{ sortedAsc ? 'Descending' : 'Ascending' }}</span></small
+    >
     <Comment
       v-for="comment in details.comments"
       :key="comment.$index"
@@ -19,7 +23,8 @@ export default {
   },
   data() {
     return {
-      details: {}
+      details: {},
+      sortedAsc: false
     }
   },
   mounted() {
@@ -40,6 +45,15 @@ export default {
           })
       } catch (e) {
         this.error = e.response.data.message
+      }
+    },
+    sortComments() {
+      this.sortedAsc = !this.sortedAsc
+
+      if (this.sortedAsc) {
+        this.details.comments.sort((a, b) => (a === b ? 0 : a > b ? 1 : -1))
+      } else {
+        this.details.comments.sort((a, b) => (a === b ? 0 : a < b ? 1 : -1))
       }
     }
   }
