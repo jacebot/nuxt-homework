@@ -22,6 +22,17 @@
           />
         </div>
         <div>
+          <PostForm :uid="loggedInUser.id" />
+        </div>
+        <div>
+          <div>
+            <button class="pure-button" @click="getPosts('back')">
+              &larr; Back
+            </button>
+            <button class="pure-button" @click="getPosts('next')">
+              Next &rarr;
+            </button>
+          </div>
           <ul v-if="!loading.busy" class="postWrap">
             <PostLink
               v-for="post in filterPostsByTag"
@@ -37,16 +48,18 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import PostLink from '~/components/PostLink.vue'
 import TagButton from '~/components/TagButton.vue'
+import PostForm from '~/components/PostForm.vue'
 
 export default {
   components: {
     Logo,
     PostLink,
-    TagButton
+    TagButton,
+    PostForm
   },
 
   data() {
@@ -54,21 +67,30 @@ export default {
       posts: [],
       tags: [],
       filterTags: [],
-      tagFilterKey: 'all'
+      tagFilterKey: 'all',
+      page: 1
     }
   },
 
   computed: {
     ...mapState(['loading']),
+    ...mapGetters(['loggedInUser']),
     filterPostsByTag(tag) {
       const newArr = [...this.posts]
       if (this.tagFilterKey === 'all') {
-        console.log(newArr)
         return this.posts
       } else {
         // const arr = this.tags.filter((t, i) => t === tag)
         // this.posts.filter((e) => e.tags.includes(this.tagFilterKey))
         return newArr.filter((e) => e.tags.includes(this.tagFilterKey))
+      }
+    },
+    pageNumber: {
+      get() {
+        return this.page
+      },
+      set(v) {
+        this.page = v
       }
     }
   },
@@ -82,11 +104,24 @@ export default {
       busyState: 'loading/triggerBusyState',
       stopBusyState: 'loading/stopBusyState'
     }),
-    async getPosts() {
+    async getPosts(id) {
       this.busyState()
+      let page
+
+      if (id) {
+        page =
+          id === 'next'
+            ? (this.pageNumber = this.page + 1)
+            : (this.pageNumber = this.page - 1)
+      }
+
+      if (!page || page < 1) {
+        page = 1
+      }
+
       try {
         await this.$axios
-          .post('list/posts')
+          .post('list/posts', { id: page })
           .then((res) => {
             this.posts = [...res.data.list]
             this.tags = [...res.data.tags]
