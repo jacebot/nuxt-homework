@@ -2,17 +2,6 @@
   <div>
     <div class="container">
       <div>
-        <div @click="setFilterByTag('all')">
-          All
-        </div>
-        <TagButton
-          v-for="tag in tags"
-          :key="tag.$index"
-          :name="tag"
-          @click.native="setFilterByTag(tag)"
-        />
-      </div>
-      <div>
         <logo />
         <h1 class="title">
           qa-app
@@ -20,6 +9,17 @@
         <h2 class="subtitle">
           My praiseworthy Nuxt.js project
         </h2>
+        <div class="filter-row">
+          <button class="pure-button" @click="setFilterByTag('all')">
+            All
+          </button>
+          <TagButton
+            v-for="tag in tags"
+            :key="tag.$index"
+            :name="tag"
+            @click.native="setFilterByTag(tag)"
+          />
+        </div>
         <div>
           <ul v-if="!loading.busy" class="postWrap">
             <PostLink
@@ -137,6 +137,11 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.filter-row {
+  display: flex;
+  padding: 2%;
 }
 
 .postWrap {
