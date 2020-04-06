@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <h1 class="title">
-      {{ type !== 'comment' ? 'Question' : 'Answer' }}
-    </h1>
+  <div class="form-container">
+    <h3 class="title">
+      {{ type !== 'comment' ? 'Ask A Question' : 'Submit An Answer' }}
+    </h3>
     <div class="content">
       <div v-if="errors.length">
         <p>
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  props: ['type', 'pid'],
+  props: ['type', 'pid', 'uid', 'slug'],
   data() {
     return {
       errors: [],
@@ -54,19 +54,23 @@ export default {
 
       if (this.type !== 'comment') {
         apiRequest.title = this.title
+        apiRequest.user_id = this.uid
       } else {
         apiRequest.post_id = this.pid
+        apiRequest.rank = 0
       }
 
       try {
         await this.$axios
           .post(route, apiRequest)
-          .then((res) => {
-            if (res.data.postId > 0) {
-              this.$route.push(`/answer/${res.data.postId}`)
-            }
-            if (res.data.commentId) {
-              // TODO: Update comments via vuex
+          .then(async (res) => {
+            const { postId, postSlug, status } = await res.data
+
+            if (status === 'success') {
+              this.$router.push({
+                path: `/answer/${postId || this.pid}/${postSlug || this.slug}`,
+                params: { id: res.data.postId }
+              })
             }
           })
           .catch((err) => {
@@ -80,4 +84,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+}
+</style>

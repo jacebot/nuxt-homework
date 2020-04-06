@@ -6,7 +6,11 @@
       Sort Comments By Rating:&nbsp;
       <span class="bold">{{ sortedAsc ? 'Descending' : 'Ascending' }}</span>
     </button>
-    <PostForm :type="'comment'" :pid="Number(this.$route.params.id)" />
+    <PostForm
+      :type="'comment'"
+      :pid="Number(this.$route.params.id)"
+      :slug="details.slug"
+    />
     <Comment
       v-for="comment in details.comments"
       :key="comment.$index"
