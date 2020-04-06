@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="answer">
     <h1>{{ details.title }}</h1>
-    <p>{{ details.body }}</p>
-    <small @click="sortComments"
-      >Sort Comments By Rating
-      <span>{{ sortedAsc ? 'Descending' : 'Ascending' }}</span></small
-    >
+    <p class="body">{{ details.body }}</p>
+    <button class="pure-button" @click="sortComments">
+      Sort Comments By Rating:&nbsp;
+      <span class="bold">{{ sortedAsc ? 'Descending' : 'Ascending' }}</span>
+    </button>
     <Comment
       v-for="comment in details.comments"
       :key="comment.$index"
@@ -60,6 +60,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.bold {
+  font-weight: 700;
+}
+.answer {
+  padding: 18px;
+}
 
-_
+.body {
+  background: lightblue;
+  border-radius: 3px;
+  padding: 6px;
+}
+</style>

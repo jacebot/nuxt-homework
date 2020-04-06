@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>
+  <div class="comment">
+    <div class="rank">
       {{ comment.rank }}
     </div>
     <div>
@@ -16,4 +16,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.comment {
+  display: flex;
+  border: dashed 1px darkgrey;
+  align-content: center;
+  align-items: center;
+}
+.rank {
+  margin-right: 12px;
+  background: darkblue;
+  color: orange;
+  font-size: 20px;
+  padding: 6px;
+  text-align: center;
+  min-width: 36px;
+}
+</style>

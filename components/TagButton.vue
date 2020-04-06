@@ -18,6 +18,7 @@ export default {
 .tag-button {
   margin-left: 6px;
 }
+
 .button-secondary {
   color: white;
   border-radius: 4px;
