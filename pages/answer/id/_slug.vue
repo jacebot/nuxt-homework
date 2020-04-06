@@ -6,6 +6,7 @@
       Sort Comments By Rating:&nbsp;
       <span class="bold">{{ sortedAsc ? 'Descending' : 'Ascending' }}</span>
     </button>
+    <PostForm :type="'comment'" :pid="Number(this.$route.params.id)" />
     <Comment
       v-for="comment in details.comments"
       :key="comment.$index"
@@ -16,10 +17,12 @@
 
 <script>
 import Comment from '~/components/Comment.vue'
+import PostForm from '~/components/PostForm.vue'
 
 export default {
   components: {
-    Comment
+    Comment,
+    PostForm
   },
   data() {
     return {
