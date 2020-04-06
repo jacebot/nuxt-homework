@@ -1,6 +1,7 @@
 'use strict'
 
 const Post = use('App/Models/Post')
+const Comment = use('App/Models/Comment')
 const User = use('App/Models/User')
 const Database = use('Database')
 
@@ -13,7 +14,8 @@ class PostController {
 
       return response.json({
         status: 'success',
-        postId: post.id
+        postId: post.id,
+        postSlug: post.slug
       })
     } catch (error) {
       response.status(400).json({
@@ -24,14 +26,14 @@ class PostController {
   }
 
   async createComment({ request, response }) {
-    const postData = request.only(['body'])
+    const commentData = request.only(['body', 'post_id'])
 
     try {
-      const comment = await Comment.create(postData)
+      const comment = await Comment.create(commentData)
 
       return response.json({
         status: 'success',
-        postId: comment.id
+        commentId: comment.id
       })
     } catch (error) {
       response.status(400).json({
