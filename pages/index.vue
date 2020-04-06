@@ -17,6 +17,7 @@
             v-for="tag in tags"
             :key="tag.$index"
             :name="tag"
+            :active="tagFilterKey"
             @click.native="setFilterByTag(tag)"
           />
         </div>
