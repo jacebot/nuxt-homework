@@ -24,7 +24,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this._props, this.$route)
     this.getPost()
   },
   methods: {
