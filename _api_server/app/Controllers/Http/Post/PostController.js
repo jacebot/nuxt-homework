@@ -66,7 +66,7 @@ class PostController {
 
   async list({ request, response }) {
     const { id } = request.only(['id'])
-
+    const tagArray = []
     // TODO: Optimize this query or use the ORM better...
     const data = await Database.select('*')
       .from('posts')
@@ -101,9 +101,14 @@ class PostController {
       }
     }
 
+    for (const tag of tagsData) {
+      tagArray.push(tag.name)
+    }
+
     return response.json({
       status: 'success',
-      list: data
+      list: data,
+      tags: [...new Set(tagArray)]
     })
   }
 }
