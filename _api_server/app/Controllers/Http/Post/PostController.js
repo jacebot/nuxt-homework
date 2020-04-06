@@ -7,7 +7,7 @@ const Database = use('Database')
 
 class PostController {
   async createPost({ request, response }) {
-    const postData = request.only(['title', 'body'])
+    const postData = request.only(['title', 'body', 'user_id'])
 
     try {
       const post = await Post.create(postData)
@@ -26,7 +26,7 @@ class PostController {
   }
 
   async createComment({ request, response }) {
-    const commentData = request.only(['body', 'post_id'])
+    const commentData = request.only(['body', 'post_id', 'rank'])
 
     try {
       const comment = await Comment.create(commentData)
