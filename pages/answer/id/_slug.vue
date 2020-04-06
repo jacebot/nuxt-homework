@@ -14,7 +14,6 @@
 import Comment from '~/components/Comment.vue'
 
 export default {
-  props: ['id'],
   components: {
     Comment
   },
