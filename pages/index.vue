@@ -123,15 +123,14 @@ export default {
         await this.$axios
           .post('list/posts', { id: page })
           .then((res) => {
-            this.posts = [
-              ...res.data.list.sort((a, b) =>
-                a.highestRatedComment === b.highestRatedComment
-                  ? 0
-                  : a.highestRatedComment < b.highestRatedComment
-                  ? 1
-                  : -1
-              )
-            ]
+            const sortedArr = res.data.list.sort((a, b) =>
+              a.highestRatedComment.rank === b.highestRatedComment.rank
+                ? 0
+                : a.highestRatedComment.rank < b.highestRatedComment.rank
+                ? 1
+                : -1
+            )
+            this.posts = [...sortedArr]
             this.tags = [...res.data.tags]
             this.stopBusyState()
           })
@@ -192,7 +191,6 @@ export default {
   list-style-type: none;
   padding: 2%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   flex-direction: row;
 }
