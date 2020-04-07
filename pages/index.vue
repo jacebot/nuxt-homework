@@ -80,8 +80,6 @@ export default {
       if (this.tagFilterKey === 'all') {
         return this.posts
       } else {
-        // const arr = this.tags.filter((t, i) => t === tag)
-        // this.posts.filter((e) => e.tags.includes(this.tagFilterKey))
         return newArr.filter((e) => e.tags.includes(this.tagFilterKey))
       }
     },
