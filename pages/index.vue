@@ -123,7 +123,15 @@ export default {
         await this.$axios
           .post('list/posts', { id: page })
           .then((res) => {
-            this.posts = [...res.data.list]
+            this.posts = [
+              ...res.data.list.sort((a, b) =>
+                a.highestRatedComment === b.highestRatedComment
+                  ? 0
+                  : a.highestRatedComment < b.highestRatedComment
+                  ? 1
+                  : -1
+              )
+            ]
             this.tags = [...res.data.tags]
             this.stopBusyState()
           })
