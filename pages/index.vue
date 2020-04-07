@@ -22,7 +22,7 @@
           />
         </div>
         <div>
-          <PostForm :uid="loggedInUser.id" />
+          <PostForm :uid="loggedInUser ? loggedInUser.id : null" />
         </div>
         <div>
           <div>
