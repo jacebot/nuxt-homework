@@ -24,7 +24,7 @@
         <div>
           <PostForm :uid="loggedInUser ? loggedInUser.id : null" />
         </div>
-        <div>
+        <div class="data-col">
           <div>
             <button class="pure-button" @click="getPosts('back')">
               &larr; Back
@@ -185,6 +185,10 @@ export default {
 .filter-row {
   display: flex;
   padding: 2%;
+}
+
+.data-col {
+  min-height: 480px;
 }
 
 .postWrap {
