@@ -18,9 +18,9 @@ TODO:
 
 5. Better pagination / transitions
 
-6. Media queries / Mobile view
+6. ~~Media queries / Mobile view~~
 
-7. Testing/Verify in IE
+7. ~~Testing/Verify in IE~~
 
 ## Build Setup
 
