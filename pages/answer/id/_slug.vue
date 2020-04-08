@@ -83,5 +83,6 @@ export default {
 
 .sort-button {
   margin: 12px;
+  margin-left: 0;
 }
 </style>

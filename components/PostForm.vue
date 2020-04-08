@@ -1,43 +1,57 @@
 <template>
   <div class="form-container">
-    <h3 class="form-title">
-      {{ type !== 'comment' ? 'Ask A Question' : 'Submit An Answer' }}
-    </h3>
-    <form name="contact">
-      <div v-if="errors.length">
-        <p>
-          <b>Please correct the following error(s):</b>
-        </p>
-        <ul>
-          <li vfor="error in errors">{{ error }}</li>
-        </ul>
-      </div>
-      <div v-if="type !== 'comment'">
-        <label class="form-label" for="question">
-          Title:
-          <input
-            id="question"
-            v-model="title"
-            class="form-field"
-            name="question"
-          />
-        </label>
-      </div>
-      <label class="form-label" for="message">
-        Message:
-        <textarea
-          id="message"
-          v-model="message"
-          class="form-field"
-          name="message"
-        ></textarea>
-      </label>
-      <input
-        value="Send message"
-        type="submit"
-        class="pure-button submit"
-        @click="checkForm"
-      />
+    <form name="contact" class="pure-form pure-form-stacked">
+      <fieldset>
+        <legend>
+          <h3 class="form-title">
+            {{ type !== 'comment' ? 'Ask A Question' : 'Submit An Answer' }}
+          </h3>
+        </legend>
+        <div v-if="errors.length">
+          <p>
+            <b>Please correct the following error(s):</b>
+          </p>
+          <ul>
+            <li vfor="error in errors">{{ error }}</li>
+          </ul>
+        </div>
+        <div class="pure-g">
+          <div
+            v-if="type !== 'comment'"
+            class="pure-u-1 pure-u-lg-1-2 form-col"
+          >
+            <label class="form-label" for="question">
+              Title:
+            </label>
+            <input
+              id="question"
+              v-model="title"
+              class="form-field pure-input-1"
+              name="question"
+            />
+          </div>
+          <div class="pure-u-1 pure-u-lg-1-2 form-col">
+            <label class="form-label" for="message">
+              Message:
+            </label>
+            <textarea
+              id="message"
+              v-model="message"
+              class="form-field pure-input-1"
+              name="message"
+            ></textarea>
+          </div>
+          <div class="pure-u-1 form-button">
+            <button
+              type="submit"
+              class="pure-button pure-button-warning submit"
+              @click="checkForm"
+            >
+              Send message
+            </button>
+          </div>
+        </div>
+      </fieldset>
     </form>
   </div>
 </template>
@@ -94,17 +108,29 @@ export default {
 
 <style scoped>
 .form-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
   border: solid 1px rgb(17, 9, 59);
   background: rgb(43, 24, 151);
   color: rgb(218, 163, 63);
+  padding: 12px;
 }
 
-.form-title {
+.pure-form legend .form-title {
   margin: 12px;
+  color: rgb(218, 163, 63);
+}
+
+.form-col {
+  padding-right: 6px;
+}
+
+.pure-button-warning {
+  color: rgb(43, 24, 151);
+  background: rgb(218, 163, 63);
+}
+
+.form-button {
+  text-align: left;
+  padding: 6px 0;
 }
 
 .form-label {
@@ -113,26 +139,7 @@ export default {
   align-items: center;
 }
 
-form {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-#message,
-#question {
-  margin: 12px auto;
-  margin-left: 12px;
-}
-
 #message {
   min-height: 54px;
-}
-
-.submit {
-  margin: 12px 0;
 }
 </style>
