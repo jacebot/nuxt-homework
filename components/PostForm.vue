@@ -28,7 +28,12 @@
           class="form-field"
           name="message"
         ></textarea>
-        <input value="Send message" class="pure-button" @click="checkForm" />
+        <input
+          value="Send message"
+          type="submit"
+          class="pure-button"
+          @click="checkForm"
+        />
       </form>
     </div>
   </div>
