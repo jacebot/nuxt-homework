@@ -1,18 +1,29 @@
 <template>
-  <div class="comment">
-    <div class="rank">
-      {{ comment.rank }}
+  <div>
+    <div v-if="comment.body" class="comment">
+      <div class="rank">
+        {{ comment.rank }}
+      </div>
+      <div>
+        {{ truncate ? truncatedComment : comment.body }}
+      </div>
     </div>
-    <div>
-      {{ comment.body }}
-    </div>
+    <p v-else>No Comment has been made.</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Comment',
-  props: ['comment']
+  computed: {
+    truncatedComment() {
+      const newBody = this.comment.body.substring(0, 48)
+      const spaceIndex = newBody.lastIndexOf(' ')
+      newBody.substring(0, spaceIndex)
+      return newBody.length < 48 ? newBody : newBody + '...'
+    }
+  },
+  props: ['comment', 'truncate']
 }
 </script>
 

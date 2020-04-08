@@ -38,6 +38,7 @@
               v-for="post in filterPostsByTag"
               :key="post.$index"
               :post="post"
+              :truncate="true"
             />
           </ul>
           <div v-else><h2>Loading...</h2></div>

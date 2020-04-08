@@ -17,18 +17,18 @@
           <label class="form-label" for="title">
             Title:
           </label>
-          <input id="title" class="form-field" name="title" v-model="title" />
+          <input id="title" v-model="title" class="form-field" name="title" />
         </div>
         <label class="form-label" for="message">
           Message:
         </label>
         <textarea
-          class="form-field"
-          name="message"
           id="message"
           v-model="message"
+          class="form-field"
+          name="message"
         ></textarea>
-        <input class="pure-button" @click="checkForm" value="Send message" />
+        <input value="Send message" class="pure-button" @click="checkForm" />
       </form>
     </div>
   </div>
@@ -85,12 +85,18 @@ export default {
 </script>
 
 <style scoped>
-.form-container {
+.form-container,
+.content {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 form {
   display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>

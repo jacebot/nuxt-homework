@@ -6,12 +6,14 @@
         params: { id: post.id }
       }"
       ><h3 class="title">
-        {{ post.title }}<br />
+        {{ truncate ? post.title.substring(0, 48) + '...' : post.title }}<br />
         <small>{{ post.created_at }}</small>
       </h3>
-      <p class="postBody">{{ post.body }}</p>
+      <p class="postBody">
+        {{ truncate ? truncatedBody : post.body }}
+      </p>
       <hr />
-      <Comment :comment="post.highestRatedComment" />
+      <Comment :comment="post.highestRatedComment" :truncate="truncate" />
     </nuxt-link>
   </li>
 </template>
@@ -24,7 +26,15 @@ export default {
   components: {
     Comment
   },
-  props: ['post']
+  props: ['post', 'truncate'],
+  computed: {
+    truncatedBody() {
+      const newBody = this.post.body.substring(0, 48)
+      const spaceIndex = newBody.lastIndexOf(' ')
+      newBody.substring(0, spaceIndex)
+      return newBody.length < 48 ? newBody : newBody + '...'
+    }
+  }
 }
 </script>
 
@@ -34,8 +44,8 @@ export default {
   margin: 1% 0;
   border: 1px solid #ddd;
   border-radius: 3px;
-  width: 46%;
   text-align: left;
+  width: 100%;
 }
 h3.title {
   font-size: 1.3rem;
