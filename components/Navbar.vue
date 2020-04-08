@@ -4,7 +4,7 @@
     class="custom-wrapper pure-g"
     :class="[showMenu ? 'open' : '']"
   >
-    <div class="pure-u-1 pure-u-md-1-3">
+    <div class="pure-u-1-8">
       <div class="pure-menu">
         <a href="/" class="pure-menu-heading custom-brand">Brand</a>
         <a
@@ -17,7 +17,7 @@
         ></a>
       </div>
     </div>
-    <div class="pure-u-1 pure-u-md-1-3">
+    <div class="pure-u-1 pure-u-md-3-8">
       <div class="pure-menu custom-can-transform">
         <ul class="pure-menu-list">
           <li class="pure-menu-item">
@@ -26,7 +26,7 @@
         </ul>
       </div>
     </div>
-    <div class="pure-u-1 pure-u-md-1-3">
+    <div class="pure-u-1 pure-u-md-1-2 custom-menu-3">
       <div class="pure-menu custom-can-transform">
         <ul class="pure-menu-list">
           <template v-if="isAuthenticated">
