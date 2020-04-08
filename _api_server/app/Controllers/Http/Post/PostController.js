@@ -92,7 +92,7 @@ class PostController {
       for (const comment of commentsData) {
         let maxRank = 0
 
-        if (post.id === comment.post_id && comment.rank > maxRank) {
+        if (post.id === comment.post_id && comment.rank >= maxRank) {
           maxRank = comment.rank
 
           post.highestRatedComment = {
