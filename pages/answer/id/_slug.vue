@@ -2,7 +2,7 @@
   <div class="answer">
     <h1>{{ details.title }}</h1>
     <p class="body">{{ details.body }}</p>
-    <button class="pure-button" @click="sortComments">
+    <button class="pure-button sort-button" @click="sortComments">
       Sort Comments By Rating:&nbsp;
       <span class="bold">{{ sortedAsc ? 'Descending' : 'Ascending' }}</span>
     </button>
@@ -79,5 +79,9 @@ export default {
   background: lightblue;
   border-radius: 3px;
   padding: 6px;
+}
+
+.sort-button {
+  margin: 12px;
 }
 </style>

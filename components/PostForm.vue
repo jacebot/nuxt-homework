@@ -1,9 +1,9 @@
 <template>
   <div class="form-container">
-    <h3 class="title">
+    <h3 class="form-title">
       {{ type !== 'comment' ? 'Ask A Question' : 'Submit An Answer' }}
     </h3>
-    <div class="content">
+    <form name="contact">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following error(s):</b>
@@ -12,30 +12,33 @@
           <li vfor="error in errors">{{ error }}</li>
         </ul>
       </div>
-      <form name="contact">
-        <div v-if="type !== 'comment'">
-          <label class="form-label" for="title">
-            Title:
-          </label>
-          <input id="title" v-model="title" class="form-field" name="title" />
-        </div>
-        <label class="form-label" for="message">
-          Message:
+      <div v-if="type !== 'comment'">
+        <label class="form-label" for="question">
+          Title:
+          <input
+            id="question"
+            v-model="title"
+            class="form-field"
+            name="question"
+          />
         </label>
+      </div>
+      <label class="form-label" for="message">
+        Message:
         <textarea
           id="message"
           v-model="message"
           class="form-field"
           name="message"
         ></textarea>
-        <input
-          value="Send message"
-          type="submit"
-          class="pure-button"
-          @click="checkForm"
-        />
-      </form>
-    </div>
+      </label>
+      <input
+        value="Send message"
+        type="submit"
+        class="pure-button submit"
+        @click="checkForm"
+      />
+    </form>
   </div>
 </template>
 
@@ -90,18 +93,46 @@ export default {
 </script>
 
 <style scoped>
-.form-container,
-.content {
+.form-container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  border: solid 1px rgb(17, 9, 59);
+  background: rgb(43, 24, 151);
+  color: rgb(218, 163, 63);
+}
+
+.form-title {
+  margin: 12px;
+}
+
+.form-label {
+  display: flex;
+  align-content: center;
+  align-items: center;
 }
 
 form {
   display: flex;
-  justify-content: center;
   align-content: center;
   align-items: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
+  flex: 1;
+}
+
+#message,
+#question {
+  margin: 12px auto;
+  margin-left: 12px;
+}
+
+#message {
+  min-height: 54px;
+}
+
+.submit {
+  margin: 12px 0;
 }
 </style>

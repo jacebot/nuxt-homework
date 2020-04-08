@@ -25,7 +25,7 @@
           <PostForm :uid="loggedInUser ? loggedInUser.id : null" />
         </div>
         <div class="data-col">
-          <div>
+          <div class="page-buttons">
             <button class="pure-button" @click="getPosts('back')">
               &larr; Back
             </button>
@@ -195,6 +195,10 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 2%;
+}
+
+.page-buttons {
+  margin: 12px auto;
 }
 
 .data-col {
