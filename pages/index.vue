@@ -194,7 +194,7 @@ export default {
   align-content: center;
   align-items: center;
   justify-content: center;
-  padding: 2%;
+  padding: 12px;
 }
 
 .page-buttons {

@@ -1,28 +1,36 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">Register!</h2>
-
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <h2 class="title">Register!</h2>
+        </div>
+        <div class="pure-u-1">
           <Notification v-if="error" :message="error" />
 
-          <form method="post" @submit.prevent="register">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control">
+          <form
+            class="pure-form pure-form-aligned"
+            method="post"
+            @submit.prevent="register"
+          >
+            <fieldset>
+              <div class="pure-control-group">
+                <label for="name">Username</label>
                 <input
+                  id="name"
                   v-model="username"
                   type="text"
-                  class="input"
-                  name="username"
+                  placeholder="Username"
                   required
                 />
+                <span class="pure-form-message-inline"
+                  >This is a required field.</span
+                >
               </div>
-            </div>
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
+
+              <div class="pure-control-group">
+                <label class="label">Email</label>
+
                 <input
                   v-model="email"
                   type="email"
@@ -30,11 +38,13 @@
                   name="email"
                   required
                 />
+                <span class="pure-form-message-inline"
+                  >This is a required field.</span
+                >
               </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
+              <div class="pure-control-group">
+                <label class="label">Password</label>
+
                 <input
                   v-model="password"
                   type="password"
@@ -42,16 +52,16 @@
                   name="password"
                   required
                 />
+                <span class="pure-form-message-inline"
+                  >This is a required field.</span
+                >
               </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">
+              <button type="submit" class="pure-button pure-button-primary">
                 Register
               </button>
-            </div>
+            </fieldset>
           </form>
-
-          <div class="has-text-centered" style="margin-top: 20px">
+          <div style="margin-top: 20px">
             Already got an account? <nuxt-link to="/login">Login</nuxt-link>
           </div>
         </div>
