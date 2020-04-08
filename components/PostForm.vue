@@ -1,6 +1,10 @@
 <template>
   <div class="form-container">
-    <form name="contact" class="pure-form pure-form-stacked">
+    <form
+      v-if="loggedInUser"
+      name="contact"
+      class="pure-form pure-form-stacked"
+    >
       <fieldset>
         <legend>
           <h3 class="form-title">
@@ -53,10 +57,18 @@
         </div>
       </fieldset>
     </form>
+    <template v-else>
+      <h3 class="form-title">
+        Please <nuxt-link to="/register">register</nuxt-link> or
+        <nuxt-link to="/login">login</nuxt-link> to&nbsp;
+        {{ type !== 'comment' ? 'Ask A Question' : 'Submit An Answer' }}
+      </h3>
+    </template>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: ['type', 'pid', 'uid', 'slug'],
   data() {
@@ -65,6 +77,9 @@ export default {
       title: null,
       message: null
     }
+  },
+  computed: {
+    ...mapGetters(['loggedInUser'])
   },
   methods: {
     async checkForm(e) {
@@ -110,8 +125,12 @@ export default {
 .form-container {
   border: solid 1px rgb(17, 9, 59);
   background: rgb(43, 24, 151);
-  color: rgb(218, 163, 63);
+  color: rgb(233, 200, 92);
   padding: 12px;
+}
+
+.form-container a {
+  color: rgb(241, 147, 59);
 }
 
 .pure-form legend .form-title {
