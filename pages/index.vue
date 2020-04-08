@@ -10,15 +10,15 @@
           My praiseworthy Nuxt.js project
         </h2>
         <div class="filter-row">
-          <button class="pure-button" @click="setFilterByTag('all')">
+          <button class="pure-button" @click="setFilterTags('all')">
             All
           </button>
           <TagButton
             v-for="tag in tags"
             :key="tag.$index"
             :name="tag"
-            :active="tagFilterKey"
-            @click.native="setFilterByTag(tag)"
+            :active="filterTags"
+            @click.native="setFilterTags(tag)"
           />
         </div>
         <div>
@@ -65,22 +65,30 @@ export default {
   data() {
     return {
       posts: [],
-      tags: [],
-      filterTags: [],
-      tagFilterKey: 'all',
       page: 1
     }
   },
 
   computed: {
     ...mapState(['loading']),
-    ...mapGetters(['loggedInUser']),
+    ...mapGetters({
+      loggedInUser: 'loggedInUser',
+      tags: 'modules/tagfilter/getTags',
+      filterTags: 'modules/tagfilter/getFilterTags'
+    }),
     filterPostsByTag(tag) {
-      const newArr = [...this.posts]
-      if (this.tagFilterKey === 'all') {
+      const newArr = []
+      if (this.filterTags.length === 0) {
         return this.posts
       } else {
-        return newArr.filter((e) => e.tags.includes(this.tagFilterKey))
+        for (const post of this.posts) {
+          for (const tag of this.filterTags) {
+            if (post.tags.includes(tag)) {
+              newArr.push(post)
+            }
+          }
+        }
+        return newArr
       }
     },
     pageNumber: {
@@ -93,14 +101,16 @@ export default {
     }
   },
 
-  created() {
-    this.getPosts()
+  async created() {
+    await this.getPosts()
   },
 
   methods: {
     ...mapActions({
       busyState: 'loading/triggerBusyState',
-      stopBusyState: 'loading/stopBusyState'
+      stopBusyState: 'loading/stopBusyState',
+      setTags: 'modules/tagfilter/setTags',
+      setFilterTags: 'modules/tagfilter/setFilterTags'
     }),
     async getPosts(id) {
       this.busyState()
@@ -129,7 +139,7 @@ export default {
                 : -1
             )
             this.posts = [...sortedArr]
-            this.tags = [...res.data.tags]
+            this.setTags(res.data.tags)
             this.stopBusyState()
           })
           .catch((err) => {
@@ -140,9 +150,6 @@ export default {
         this.error = e.response.data.message
         this.stopBusyState()
       }
-    },
-    setFilterByTag(tag) {
-      this.tagFilterKey = tag
     }
   }
 }
@@ -182,6 +189,10 @@ export default {
 
 .filter-row {
   display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
   padding: 2%;
 }
 
@@ -194,6 +205,8 @@ export default {
   padding: 2%;
   display: flex;
   justify-content: space-between;
-  flex-direction: row;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 </style>

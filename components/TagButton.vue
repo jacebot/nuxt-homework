@@ -1,7 +1,7 @@
 <template>
   <button
     class="pure-button button-secondary tag-button"
-    :class="{ 'button-active': active === name }"
+    :class="{ 'button-active': active.includes(name) }"
   >
     {{ name }}
   </button>
@@ -17,6 +17,7 @@ export default {
 <style scoped>
 .tag-button {
   margin-left: 6px;
+  margin-top: 3px;
 }
 
 .button-secondary {
