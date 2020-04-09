@@ -16,7 +16,7 @@ TODO:
 
 3. Refactor api calls to use built in fetch and/or vuex
 
-4. Add ability to agg tags to posts
+4. Add ability to add tags to posts
 
 5. Add ability rank answers
 
