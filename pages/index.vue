@@ -204,4 +204,9 @@ export default {
   list-style-type: none;
   padding: 2%;
 }
+
+small {
+  font-size: 0.5em;
+  font-weight: 300;
+}
 </style>

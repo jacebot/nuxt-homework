@@ -6,8 +6,11 @@
         params: { id: post.id }
       }"
       ><h3 class="title">
-        {{ truncate ? post.title.substring(0, 48) + '...' : post.title }}<br />
-        <small>{{ post.created_at }}</small>
+        {{ truncate ? truncatedTitle : post.title }}<br />
+        <small
+          >Question By: {{ post.user_id ? post.user_id : '' }} at
+          {{ post.created_at }}</small
+        >
       </h3>
       <p class="postBody">
         {{ truncate ? truncatedBody : post.body }}
@@ -28,6 +31,12 @@ export default {
   },
   props: ['post', 'truncate'],
   computed: {
+    truncatedTitle() {
+      const newTitle = this.post.title.substring(0, 48)
+      const spaceIndex = newTitle.lastIndexOf(' ')
+      newTitle.substring(0, spaceIndex)
+      return newTitle.length < 48 ? newTitle : newTitle + '...'
+    },
     truncatedBody() {
       const newBody = this.post.body.substring(0, 48)
       const spaceIndex = newBody.lastIndexOf(' ')

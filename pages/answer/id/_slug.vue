@@ -1,6 +1,12 @@
 <template>
   <div class="answer">
-    <h1>{{ details.title }}</h1>
+    <h1>
+      {{ details.title }}<br />
+      <small
+        >Question By: {{ details.user_id ? details.user_id : '' }} at
+        {{ details.created_at }}</small
+      >
+    </h1>
     <p class="body">{{ details.body }}</p>
     <button class="pure-button sort-button" @click="sortComments">
       Sort Comments By Rating:&nbsp;
@@ -84,5 +90,10 @@ export default {
 .sort-button {
   margin: 12px;
   margin-left: 0;
+}
+
+small {
+  font-size: 0.5em;
+  font-weight: 300;
 }
 </style>

@@ -1,10 +1,6 @@
 <template>
   <div class="form-container">
-    <form
-      v-if="loggedInUser"
-      name="contact"
-      class="pure-form pure-form-stacked"
-    >
+    <div v-if="loggedInUser" name="contact" class="pure-form pure-form-stacked">
       <fieldset>
         <legend>
           <h3 class="form-title">
@@ -47,7 +43,6 @@
           </div>
           <div class="pure-u-1 form-button">
             <button
-              type="submit"
               class="pure-button pure-button-warning submit"
               @click="checkForm"
             >
@@ -56,7 +51,7 @@
           </div>
         </div>
       </fieldset>
-    </form>
+    </div>
     <template v-else>
       <h3 class="form-title">
         Please <nuxt-link to="/register">register</nuxt-link> or
@@ -103,11 +98,13 @@ export default {
           .then(async (res) => {
             const { postId, postSlug, status } = await res.data
 
-            if (status === 'success') {
+            if (status === 'success' && this.type !== 'comment') {
               this.$router.push({
                 path: `/answer/${postId || this.pid}/${postSlug || this.slug}`,
                 params: { id: res.data.postId }
               })
+            } else {
+              this.$router.go()
             }
           })
           .catch((err) => {
@@ -160,5 +157,10 @@ export default {
 
 #message {
   min-height: 54px;
+}
+
+#message,
+#question {
+  color: #000;
 }
 </style>
