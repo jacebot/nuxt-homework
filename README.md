@@ -4,7 +4,7 @@
 
 **Disclaimer**
 
-_*CORS origin* is turned off on the API server for testing_
+_*CORS origin* is disabled on the API server for testing_
 
 _Uses PureCSS as a css reset, with a little extra classes._
 
