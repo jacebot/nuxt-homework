@@ -36,7 +36,7 @@
           </div>
           <div class="pure-u-1 pure-u-lg-1-2 form-col">
             <label class="form-label" for="message">
-              Message:
+              Comment:
             </label>
             <textarea
               id="message"
@@ -51,7 +51,7 @@
               class="pure-button pure-button-warning submit"
               @click="checkForm"
             >
-              Send message
+              Submit {{ type !== 'comment' ? 'Question' : 'Answer' }}
             </button>
           </div>
         </div>
