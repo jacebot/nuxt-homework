@@ -8,6 +8,8 @@ _*CORS origin* is turned off on the API server for testing_
 
 _Uses PureCSS as a css reset, with a little extra classes._
 
+* Use the following credentials: demoUser@gmail.com | abc123 or register a new user
+
 TODO:
 
 1. Add gracefully handled errors and form validation
