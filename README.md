@@ -10,11 +10,15 @@ _Uses PureCSS as a css reset, with a little extra classes._
 
 TODO:
 
-1. Gracefully handle errors and form validation
+1. Add gracefully handled errors and form validation
 
-2. Better pagination / transitions
+2. Add better pagination / transitions
 
 3. Refactor api calls to use built in fetch and/or vuex
+
+4. Add ability to agg tags to posts
+
+5. Add ability rank answers
 
 ## Build Setup
 
