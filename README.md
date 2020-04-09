@@ -8,19 +8,9 @@ _*CORS origin* is turned off on the API server for testing_
 
 TODO:
 
-1. ~~Refactor to make more use of vuex,~~
+1. Gracefully handle errors and form validation
 
-2. ~~Multi filter support~~
-
-3. ~~Add styles to the forms~~
-
-4. Gracefully handle errors and form validation
-
-5. Better pagination / transitions
-
-6. ~~Media queries / Mobile view~~
-
-7. ~~Testing/Verify in IE~~
+2. Better pagination / transitions
 
 ## Build Setup
 
