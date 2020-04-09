@@ -189,11 +189,6 @@ export default {
 }
 
 .filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
   padding: 12px;
 }
 
@@ -208,10 +203,5 @@ export default {
 .postWrap {
   list-style-type: none;
   padding: 2%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
 }
 </style>
