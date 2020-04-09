@@ -15,6 +15,7 @@
 <script>
 export default {
   name: 'Comment',
+  props: ['comment', 'truncate'],
   computed: {
     truncatedComment() {
       const newBody = this.comment.body.substring(0, 48)
@@ -22,8 +23,7 @@ export default {
       newBody.substring(0, spaceIndex)
       return newBody.length < 48 ? newBody : newBody + '...'
     }
-  },
-  props: ['comment', 'truncate']
+  }
 }
 </script>
 
